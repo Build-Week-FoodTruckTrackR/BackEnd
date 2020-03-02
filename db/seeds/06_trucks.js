@@ -13,7 +13,7 @@ exports.seed = function (knex) {
                     customer_ratings: [4, 3],
                     customer_rating_avg: 3.5,
                     current_location: 1,
-                    next_location: 3
+                    next_location: 1
                 },
                 {
                     img_url: 'https://www.rd.com/wp-content/uploads/2018/11/food-truck-2.jpg',
@@ -23,7 +23,7 @@ exports.seed = function (knex) {
                     customer_ratings: [4, 1, 3],
                     customer_rating_avg: 2.667,
                     current_location: 2,
-                    next_location: 1
+                    next_location: 2
                 },
                 {
                     img_url: 'https://www.ft.com/__origami/service/image/v2/images/raw/https%3A%2F%2Fs3-ap-northeast-1.amazonaws.com%2Fpsh-ex-ftnikkei-3937bb4%2Fimages%2F7%2F9%2F0%2F2%2F20722097-1-eng-GB%2F190315_6845re1.jpg?source=nar-cms',
@@ -33,7 +33,7 @@ exports.seed = function (knex) {
                     customer_ratings: [4, 3, 5],
                     customer_rating_avg: 4,
                     current_location: 3,
-                    next_location: 2
+                    next_location: 3
                 }
             ]);
         });

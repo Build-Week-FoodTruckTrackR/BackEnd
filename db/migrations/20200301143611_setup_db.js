@@ -68,7 +68,6 @@ exports.up = function (knex) {
                 .onDelete('CASCADE');
             tbl.integer('next_location')
                 .unsigned()
-                .notNullable()
                 .references('id')
                 .inTable('possible_next_locations')
                 .onUpdate('CASCADE')
@@ -79,10 +78,11 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
     return knex.schema
-        .dropTableIfExists('truck_next_locations')
         .dropTableIfExists('operators')
         .dropTableIfExists('diners')
         .dropTableIfExists('menu_items')
         .dropTableIfExists('trucks')
+        .dropTableIfExists('possible_next_locations')
         .dropTableIfExists('truck_locations')
+        // .dropTableIfExists('next_truck_locations')
 };

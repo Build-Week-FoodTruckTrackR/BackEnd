@@ -5,6 +5,7 @@ const helmet = require('helmet');
 // const authenticate = require('./operator/authenticate-middleware.js.js');
 const operatorRouter = require('./operator/router');
 const dinerRouter = require('./diner/router')
+const trucksRouter = require('./trucks/router')
 
 const server = express();
 
@@ -14,6 +15,8 @@ server.use(express.json());
 
 server.use('/operators', operatorRouter)
 server.use('/diners', dinerRouter)
+server.use('/trucks', trucksRouter)
+
 server.use((err, req, res, next) => {
     console.log(err)
     res.status(err.httpStatusCode || 500)

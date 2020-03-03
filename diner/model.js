@@ -11,6 +11,9 @@ module.exports.getDinerByUsername = async username =>
 module.exports.updateDinerLocation = async (id, longitude, latitude) =>
     await db('diners').where({ id }).update({ longitude, latitude }).returning('*')
 
+// module.exports.getTrucksRadius( async (longitude, latitude, radius, trucks) => {
+// })
+
 
 module.exports.getDiners = async (department) => {
     if (department) {

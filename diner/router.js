@@ -1,6 +1,6 @@
 const router = require('express').Router()
 
-const { registerDiner, getDinerByUsername } = require('./model')
+const { registerDiner, getDinerByUsername, updateDinerLocation } = require('./model')
 const { hashPassword, comparePasswords, generateToken } = require('../authHelpers')
 
 router.post('/register', async (req, res, next) => {
@@ -25,10 +25,10 @@ router.post('/register', async (req, res, next) => {
 
 router.post('/login', async (req, res, next) => {
     try {
-        const { username, password } = req.body
+        const { username, password, longitude, latitude} = req.body
 
-        if (!username || !password) {
-            const incompleteData = new Error('Username, Password must be provided')
+        if (!username || !password || !longitude || !latitude) {
+            const incompleteData = new Error('Username, Password, and location must be provided')
             incompleteData.httpStatusCode = 400
             throw incompleteData
         }
@@ -44,6 +44,8 @@ router.post('/login', async (req, res, next) => {
             throw tryAgain
         }
 
+        await updateDinerLocation(diner.id, longitude, latitude)
+        
         const token = generateToken(diner)
 
         res.json({ token })

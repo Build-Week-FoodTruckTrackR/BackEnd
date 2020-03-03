@@ -1,8 +1,8 @@
 # The base URL for making requests is: 68.183.138.134
 
-## To register an operator, make a post request to: 68.183.138.134/operators/register
+## Operater registration: operators/register
 
-### The data expected
+### Data expected
 
     {
     	username: string,
@@ -19,7 +19,7 @@
     "trucks_owned": [1, 3]
 	}
 
-## To login an operator, make a post request to: 68.183.138.134/operators/register
+## To login an operator, make a post request to: 68.183.138.134/operators/login
 
 ### The data expected
 
@@ -34,6 +34,24 @@
     {
     	token: string
 	}
+
+## Diner Register: /diners/register
+    Expects: {
+        username: string,
+        password: string,
+        favorite_trucks: [integer]
+    }
+## Diner Login: /diners/login
+    Expects: {
+        "username": "hoho9",
+        "password": "hehe",
+        "favorite_trucks": [1],
+        "longitude" : 3.234243,
+        "latitude": 100.23423
+    }
+    Returns {
+        torken: string
+    }
 
 # BackEnd
 

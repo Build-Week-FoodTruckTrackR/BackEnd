@@ -8,6 +8,10 @@ module.exports.registerDiner = async (username, password, favorite_trucks) =>
 module.exports.getDinerByUsername = async username =>
     await db('diners').select('username', 'password', 'id').where({ username })
 
+module.exports.updateDinerLocation = async (id, longitude, latitude) =>
+    await db('diners').where({ id }).update({ longitude, latitude }).returning('*')
+
+
 module.exports.getDiners = async (department) => {
     if (department) {
         return await db('users').where({ department })

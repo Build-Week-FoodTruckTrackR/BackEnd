@@ -78,6 +78,22 @@
         torken: string
     }
 
+## Get Diners Favorite Trucks: /diners/favoriteTrucks
+     expects just a get call from a logged in user
+
+     Returns 
+         [
+            {
+                "id": 1,
+                "longitude": -118.363,
+                "latitude": 34.084,
+                "arrival_time": "1583344585227",
+                "departure_time": "1583344665727",
+                "address": "7957 Melrose Ave, Los Angeles, CA 90046, USA"
+            }
+        ]
+     
+
 # BackEnd
 
 1. User can register/create an account as either a `operator` or `diner` by providing, at a minumum, a unique `username`, a valid `email` and a strong `password`. (mobile, web)

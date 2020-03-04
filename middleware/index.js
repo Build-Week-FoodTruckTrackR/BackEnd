@@ -37,6 +37,7 @@ module.exports.authType = type => (req, res, next) => {
             throw notDiner
         }
 
+        req.userType=req.decodedToken.type
         next()
 
     } catch (error) {
@@ -49,7 +50,7 @@ module.exports.dinerCoords = async (req, res, next) => {
         const [diner] = await getDinerByID(req.decodedToken.subject)
 
         req.dinerCoords = {longitude: diner.longitude, latitude:diner.latitude}
-        
+        req.dinerFavoriteTrucks = diner.favorite_trucks
         next()
     } catch (error) {
         next(error)

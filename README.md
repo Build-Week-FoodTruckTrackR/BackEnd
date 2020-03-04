@@ -19,6 +19,11 @@
     "trucks_owned": [1, 3]
     }
 
+## Current fake operators:
+    { username: 'Amber', password:"lala", trucks_owned: [1] },
+    { username: 'Billy', password:"lala", trucks_owned: [1, 2,] },
+    { username: 'Chris', password:"lala", trucks_owned: [1, 2, 3] }
+
 ## To login an operator, make a post request to: 68.183.138.134/operators/login
 
 ### The data expected

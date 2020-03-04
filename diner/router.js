@@ -1,7 +1,10 @@
 const router = require('express').Router()
 
 const { registerDiner, getDinerByUsername, updateDinerLocation } = require('./model')
+const { getAllTrucks } = require('../trucks/model')
 const { hashPassword, comparePasswords, generateToken } = require('../authHelpers')
+
+const { authToken, authType, dinerCoords } = require('../middleware')
 
 router.post('/register', async (req, res, next) => {
     try {
@@ -25,17 +28,24 @@ router.post('/register', async (req, res, next) => {
 
 router.post('/login', async (req, res, next) => {
     try {
-        const { username, password, longitude, latitude} = req.body
-
-        if (!username || !password || !longitude || !latitude) {
-            const incompleteData = new Error('Username, Password, and location must be provided')
+        const { username, password } = req.body
+        console.log(
+            'dinerLoginBOdy',req.body
+        )
+        if (!username || !password ) {
+            const incompleteData = new Error('Username, Password must be provided')
             incompleteData.httpStatusCode = 400
             throw incompleteData
         }
 
         const [diner] = await getDinerByUsername(username)
 
-        console.log('operatorLoginOperator', diner)
+        if(!diner){
+            const noSuchDiner = new Error('No such diner')
+            noSuchDiner.httpStatusCode = 400
+            throw noSuchDiner
+        }
+        console.log('dinerLoginDiner', diner)
         const authenticated = comparePasswords(password, diner.password)
 
         if (!authenticated) {
@@ -44,11 +54,21 @@ router.post('/login', async (req, res, next) => {
             throw tryAgain
         }
 
-        await updateDinerLocation(diner.id, longitude, latitude)
-        
-        const token = generateToken(diner)
+        // await updateDinerLocation(diner.id, longitude, latitude)
+
+        const token = generateToken(diner, "diner")
 
         res.json({ token })
+    } catch (error) {
+        next(error)
+    }
+})
+
+router.get('/radius', authToken, authType('diner'), dinerCoords, async (req, res, next) => {
+    try {
+        const trucks = await getAllTrucks()
+        res.json(trucks)
+
     } catch (error) {
         next(error)
     }

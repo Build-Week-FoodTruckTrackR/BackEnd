@@ -20,6 +20,7 @@ exports.up = function (knex) {
                 .notNullable()
             tbl.float('longitude')
             tbl.float('latitude')
+                .defaultTo(null)
             tbl.specificType('favorite_trucks', 'integer ARRAY');
         })
 

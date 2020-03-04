@@ -17,7 +17,7 @@
     "username": "hoho9",
     "id": 13,
     "trucks_owned": [1, 3]
-	}
+    }
 
 ## To login an operator, make a post request to: 68.183.138.134/operators/login
 
@@ -27,27 +27,52 @@
     	username: string,
     	password: string,
     }
-    trucks_owned can choose from 1 to 3, since this refers ids of currently registered trucks
+   
 
 ### Data returned:
 
     {
     	token: string
-	}
+    }
+
+### Current fake diners:
+
+     {
+        username: 'Amy',
+        password: "lala",
+        longitude: -118.358078,
+        latitude: 34.063381,
+        favorite_trucks: [1] 
+    },
+    {   
+        username: 'Bobby',
+        password: "lala",
+        longitude: -118.339058, l
+        atitude: 34.083260, 
+        favorite_trucks: [1, 2] 
+    },
+    { 
+        username: 'Chau', 
+        password: "lala", 
+        longitude: -118.268112, 
+        latitude: 34.089439, 
+        favorite_trucks: [1, 2, 3] 
+    }
 
 ## Diner Register: /diners/register
+
     Expects: {
         username: string,
         password: string,
         favorite_trucks: [integer]
     }
+
 ## Diner Login: /diners/login
+
     Expects: {
         "username": "hoho9",
         "password": "hehe",
-        "favorite_trucks": [1],
-        "longitude" : 3.234243,
-        "latitude": 100.23423
+        
     }
     Returns {
         torken: string

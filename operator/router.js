@@ -43,7 +43,8 @@ router.post('/login', async (req, res, next) => {
             tryAgain.httpStatusCode = 400
             throw tryAgain
         }
-        const token = generateToken(operator)
+        
+        const token = generateToken(operator, "operator")
 
         res.json({token})
     } catch (error) {

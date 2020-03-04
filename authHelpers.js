@@ -10,10 +10,11 @@ module.exports.hashPassword = password =>
 module.exports.comparePasswords = (password, hashedPassword) =>
     compareSync(password, hashedPassword)
 
-module.exports.generateToken = ({ id, username }) => {
+module.exports.generateToken = ({ id, username }, type) => {
     const payload = {
         subject: id,
         username,
+        type
     };
 
     const options = {

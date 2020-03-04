@@ -24,6 +24,7 @@ router.post('/register', async (req, res, next) => {
 })
 
 router.post('/login', async (req, res, next) => {
+    console.log('operatorsLoginBody', req.body)
     try {
         const { username, password} = req.body
 
@@ -34,7 +35,11 @@ router.post('/login', async (req, res, next) => {
         }
 
         const [operator] = await getOperatorByUsername(username)
-
+        if(!operator){
+            const noSuchOperator = new Error('No such operator')
+            noSuchOperator.httpStatusCode = 400
+            throw noSuchOperator
+        }
         console.log('operatorLoginOperator', operator)
         const authenticated = comparePasswords(password, operator.password)
         

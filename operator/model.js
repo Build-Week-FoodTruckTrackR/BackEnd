@@ -5,8 +5,15 @@ module.exports.registerOperator = async (username, password, trucks_owned) =>
         .insert({ username, password, trucks_owned })
         .returning(['username', 'id', 'trucks_owned'])
 
-module.exports.getOperatorByUsername = async username =>
-    await db('operators').select('username', 'password', 'id').where({ username })
+module.exports.getOperatorByUsername = async username =>{
+    console.log('getOpBYName', username)
+    
+    return await db('operators')
+        .select('username', 'password', 'id')
+        .where({ username })
+
+}
+
 
 module.exports.getUsers = async (department) => {
     if (department) {

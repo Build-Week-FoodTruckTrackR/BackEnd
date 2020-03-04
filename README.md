@@ -87,14 +87,28 @@
      expects just a get call from a logged in user
 
      Returns 
-         [
+        [
             {
                 "id": 1,
                 "longitude": -118.363,
                 "latitude": 34.084,
                 "arrival_time": "1583344585227",
                 "departure_time": "1583344665727",
-                "address": "7957 Melrose Ave, Los Angeles, CA 90046, USA"
+                "address": "7957 Melrose Ave, Los Angeles, CA 90046, USA",
+                "cuisine": "asian",
+                "img_url": "https://s.abcnews.com/images/US/dog-food-truck-01-ht-jef-191010_hpEmbed_16x9_992.jpg",
+                "customer_rating_avg": 3.5
+            },
+            {
+                "id": 2,
+                "longitude": -118.319,
+                "latitude": 34.0409,
+                "arrival_time": "1583344580727",
+                "departure_time": "1583344765727",
+                "address": "2529 W 18th St, Los Angeles, CA 90019, USA",
+                "cuisine": "vegetarian",
+                "img_url": "https://www.rd.com/wp-content/uploads/2018/11/food-truck-2.jpg",
+                "customer_rating_avg": 2.667
             }
         ]
      

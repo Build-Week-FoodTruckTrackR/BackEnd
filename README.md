@@ -86,7 +86,8 @@
 ## Get Diners Favorite Trucks: /diners/favoriteTrucks
      expects just a get call from a logged in user
 
-     Returns 
+     Returns truck objects sorted in ascending order by distance, which is in miles
+     rounded to the hundreds
         [
             {
                 "id": 1,
@@ -97,7 +98,8 @@
                 "address": "7957 Melrose Ave, Los Angeles, CA 90046, USA",
                 "cuisine": "asian",
                 "img_url": "https://s.abcnews.com/images/US/dog-food-truck-01-ht-jef-191010_hpEmbed_16x9_992.jpg",
-                "customer_rating_avg": 3.5
+                "customer_rating_avg": 3.5,
+                "distance": 1.37
             },
             {
                 "id": 2,
@@ -108,7 +110,8 @@
                 "address": "2529 W 18th St, Los Angeles, CA 90019, USA",
                 "cuisine": "vegetarian",
                 "img_url": "https://www.rd.com/wp-content/uploads/2018/11/food-truck-2.jpg",
-                "customer_rating_avg": 2.667
+                "customer_rating_avg": 2.667,
+                "distance": 3.15
             }
         ]
      

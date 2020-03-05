@@ -49,7 +49,8 @@ module.exports.dinerCoords = async (req, res, next) => {
     try {
         const [diner] = await getDinerByID(req.decodedToken.subject)
 
-        req.dinerCoords = {longitude: diner.longitude, latitude:diner.latitude}
+        req.dinerLon = diner.longitude 
+        req.dinerLat = diner.latitude
         req.dinerFavoriteTrucks = diner.favorite_trucks
         next()
     } catch (error) {

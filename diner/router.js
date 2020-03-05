@@ -3,7 +3,7 @@ const router = require('express').Router()
 const { registerDiner, getDinerByUsername, updateDinerLocation } = require('./model')
 const { getTruckById, getTruckLocationByID } = require('../trucks/model')
 const { hashPassword, comparePasswords, generateToken } = require('../authHelpers')
-const { coordsToAddress } = require('../services')
+const { coordsToAddress, haversine } = require('../services')
 
 const { authToken, authType, dinerCoords } = require('../middleware')
 
@@ -30,7 +30,7 @@ router.post('/register', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
     try {
         const { username, password } = req.body
-        
+
         if (!username || !password) {
             const incompleteData = new Error('Username, Password must be provided')
             incompleteData.httpStatusCode = 400
@@ -68,7 +68,7 @@ router.get('/favoriteTrucks', authToken, authType('diner'), dinerCoords, async (
         console.log('zzz', req.dinerFavoriteTrucks)
 
         const truckDataPromises = []
-        for(let i = 0; i < req.dinerFavoriteTrucks.length; i++) {
+        for (let i = 0; i < req.dinerFavoriteTrucks.length; i++) {
             truckDataPromises.push(getTruckById(req.dinerFavoriteTrucks[i]))
         }
 
@@ -92,10 +92,24 @@ router.get('/favoriteTrucks', authToken, authType('diner'), dinerCoords, async (
         const trucksWithAddr = await Promise.all(coordsToAddresses) // Another promise.all
 
         const combined = []
-        for(let i = 0; i < flatTrucks.length; i++){ // Combine addresses and trucks array
-            combined.push({...flatTrucks[i], ...trucksWithAddr[i], ...truckData[i]})
+        for (let i = 0; i < flatTrucks.length; i++) { // Combine addresses and trucks array
+            combined.push({ ...flatTrucks[i], ...trucksWithAddr[i], ...truckData[i] })
         }
-        
+
+        for (let i = 0; i < combined.length; i++) {
+            combined[i].distance = Math.round(
+                haversine(
+                    req.dinerLon,
+                    req.dinerLat,
+                    combined[i].longitude,
+                    combined[i].latitude)
+                / 1609.344
+                * 100
+            ) / 100
+        }
+
+        combined.sort((a, b) => a.distance - b.distance)
+
         res.json(combined)
     } catch (error) {
         next(error)

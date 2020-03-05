@@ -6,11 +6,9 @@
 
     {
     	username: string,
-    	password: string,
-    	trucks_owned: [integer]
+    	password: string
     }
-    trucks_owned can choose from 1 to 3, since this refers ids of currently registered trucks
-
+    
 ### Data returned:
 
     {
@@ -80,7 +78,7 @@
         
     }
     Returns {
-        torken: string
+        token: string
     }
 
 ## Get Diners Favorite Trucks: /diners/favoriteTrucks
@@ -114,8 +112,25 @@
                 "distance": 3.15
             }
         ]
-     
 
+## Trucks owned by operator: /operators/trucks
+    Logged in operator gets returned an array of truck objects owned by them.
+
+    example:
+        [
+            {
+                "cuisine": "asian",
+                "img_url": "https://s.abcnews.com/images/US/dog-food-truck-01-ht-jef-191010_hpEmbed_16x9_992.jpg",
+                "customer_rating_avg": 3.5,
+                "id": 1
+            },
+            {
+                "cuisine": "vegetarian",
+                "img_url": "https://www.rd.com/wp-content/uploads/2018/11/food-truck-2.jpg",
+                "customer_rating_avg": 2.667,
+                "id": 2
+            }
+        ]
 # BackEnd
 
 1. User can register/create an account as either a `operator` or `diner` by providing, at a minumum, a unique `username`, a valid `email` and a strong `password`. (mobile, web)

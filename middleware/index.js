@@ -1,6 +1,7 @@
 const { verify } = require('jsonwebtoken')
 const jwtSecret = process.env.JWTSECRET || 'secret'
 const { getDinerByID } = require('../diner/model')
+const { getOperatorByID} = require('../operator/model')
 
 module.exports.authToken = (req, res, next) => {
     try {
@@ -8,6 +9,7 @@ module.exports.authToken = (req, res, next) => {
 
         if (authorization) {
             verify(authorization, jwtSecret, (err, decodedToken) => {
+                console.log('decodedToken', decodedToken)
                 if (err) {
                     const unauthorized = new Error("Unauthorized")
                     unauthorized.httpStatusCode = 403
@@ -29,12 +31,13 @@ module.exports.authToken = (req, res, next) => {
     }
 }
 
+
 module.exports.authType = type => (req, res, next) => {
     try {
         if (req.decodedToken.type !== type) {
-            const notDiner = new Error("You are not a diner")
+            const notType = new Error("You are not a " + type)
             notDiner.httpStatusCode = 401
-            throw notDiner
+            throw notType
         }
 
         req.userType=req.decodedToken.type
@@ -54,6 +57,20 @@ module.exports.dinerCoords = async (req, res, next) => {
         req.dinerFavoriteTrucks = diner.favorite_trucks
         next()
     } catch (error) {
+        next(error)
+    }
+}
+
+module.exports.operatorTrucks = async(req, res, next) => {
+    try{
+
+        const [operator] = await getOperatorByID(req.decodedToken.subject)
+
+        console.log('operatorMW', operator)
+        req.trucksOwned = operator.trucks_owned
+        console.log('req.trucksOwned', req.trucksOwned)
+        next()
+    }catch(error){
         next(error)
     }
 }

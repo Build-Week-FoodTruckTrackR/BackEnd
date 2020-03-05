@@ -1,9 +1,9 @@
 const db = require('../db/dbConfig')
 
-module.exports.registerOperator = async (username, password, trucks_owned) =>
+module.exports.registerOperator = async (username, password) =>
     await db('operators')
-        .insert({ username, password, trucks_owned })
-        .returning(['username', 'id', 'trucks_owned'])
+        .insert({ username, password })
+        .returning(['username', 'id'])
 
 module.exports.getOperatorByUsername = async username =>{
     console.log('getOpBYName', username)
@@ -14,6 +14,7 @@ module.exports.getOperatorByUsername = async username =>{
 
 }
 
+module.exports.getOperatorByID = id => db('operators').select('*').where({id})
 
 module.exports.getUsers = async (department) => {
     if (department) {

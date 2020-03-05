@@ -1,13 +1,21 @@
 const db = require('../db/dbConfig')
 
-
-module.exports.getAllTrucks = async () => db('trucks')
+module.exports.getAllTrucks = () => db('trucks')
     .select('*')
 
-module.exports.getTruckLocationByID = async id => db('truck_locations')
+module.exports.getTruckLocationByID = id => db('truck_locations')
     .where({ id })
 
-module.exports.getTruckById = async id => db('trucks')
-    .select('cuisine', 'img_url', 'customer_rating_avg')
-    .where({id})
+module.exports.getTruckById = id => db('trucks')
+    .select('cuisine', 'img_url', 'customer_rating_avg', 'id')
+    .where({ id })
 
+module.exports.addTruck = ({ img_url, cuisine, menu, current_location, next_location }) => {
+    return db('trucks').insert({ img_url, cuisine, menu, current_location, next_location })
+}
+
+module.exports.addTruck = ({ id, img_url, cuisine, menu, current_location, next_location }) => {
+    return db('trucks').update({ img_url, cuisine, menu, current_location, next_location }).where({ id })
+}
+
+module.exports.removeTruckByID = id => db('trucks').del().where({ id })

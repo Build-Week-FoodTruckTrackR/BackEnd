@@ -85,5 +85,4 @@ exports.down = function (knex) {
         .dropTableIfExists('trucks')
         .dropTableIfExists('possible_next_locations')
         .dropTableIfExists('truck_locations')
-        // .dropTableIfExists('next_truck_locations')
 };

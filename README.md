@@ -113,7 +113,7 @@
             }
         ]
 
-## Trucks owned by operator: /operators/trucks
+## Trucks owned by operator: GET /operators/trucks
     Logged in operator gets returned an array of truck objects owned by them.
 
     example:
@@ -131,6 +131,38 @@
                 "id": 2
             }
         ]
+
+## Add truck: POST /trucks
+    Only reqires a cusine and a current_loction, which can be a number from 1 to 3
+    expects [
+    {
+        "id": 4,
+        "images": null,
+        "img_url": null,
+        "cuisine": "Chau",
+        "customer_ratings": null,
+        "customer_rating_avg": null,
+        "menu": null,
+        "current_location": 1,
+        "next_location": null
+    }
+
+    returns {
+        [
+    {
+        "id": 4,
+        "images": null,
+        "img_url": null,
+        "cuisine": "Chau",
+        "customer_ratings": null,
+        "customer_rating_avg": null,
+        "menu": null,
+        "current_location": 1,
+        "next_location": null
+    }
+]
+    }
+]
 
 ## Kenji
     Diners: get request to http://68.183.138.134/diners returns:

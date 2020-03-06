@@ -16,9 +16,5 @@ module.exports.getOperatorByUsername = async username =>{
 
 module.exports.getOperatorByID = id => db('operators').select('*').where({id})
 
-module.exports.getUsers = async (department) => {
-    if (department) {
-        return await db('users').where({ department })
-    }
-    return await db('users')
-}
+module.exports.getAllOperators = () => db('operators')
+

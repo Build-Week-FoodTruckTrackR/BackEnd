@@ -131,6 +131,126 @@
                 "id": 2
             }
         ]
+
+## Kenji
+    Diners: get request to http://68.183.138.134/diners returns:
+
+    [
+        {
+            "id": 1,
+            "username": "Amy",
+            "password": "$2a$10$U3bPeaHQ1mDcmg6Lw4tMLuiTxlkigdLnFz7glY8gTv.t10JwQbcIG",
+            "longitude": -118.358,
+            "latitude": 34.0634,
+            "favorite_trucks": [
+                1
+            ]
+        },
+        {
+            "id": 2,
+            "username": "Bobby",
+            "password": "$2a$10$U3bPeaHQ1mDcmg6Lw4tMLuiTxlkigdLnFz7glY8gTv.t10JwQbcIG",
+            "longitude": -118.339,
+            "latitude": 34.0833,
+            "favorite_trucks": [
+                1,
+                2
+            ]
+        },
+        {
+            "id": 3,
+            "username": "Chau",
+            "password": "$2a$10$U3bPeaHQ1mDcmg6Lw4tMLuiTxlkigdLnFz7glY8gTv.t10JwQbcIG",
+            "longitude": -118.268,
+            "latitude": 34.0894,
+            "favorite_trucks": [
+                1,
+                2,
+                3
+            ]
+        }
+    ]
+
+    Operators: get request to http://68.183.138.134/operators returns
+
+    [
+        {
+            "id": 1,
+            "username": "Amber",
+            "password": "$2a$10$U3bPeaHQ1mDcmg6Lw4tMLuiTxlkigdLnFz7glY8gTv.t10JwQbcIG",
+            "trucks_owned": [
+                1
+            ]
+        },
+        {
+            "id": 2,
+            "username": "Billy",
+            "password": "$2a$10$U3bPeaHQ1mDcmg6Lw4tMLuiTxlkigdLnFz7glY8gTv.t10JwQbcIG",
+            "trucks_owned": [
+                1,
+                2
+            ]
+        },
+        {
+            "id": 3,
+            "username": "Chris",
+            "password": "$2a$10$U3bPeaHQ1mDcmg6Lw4tMLuiTxlkigdLnFz7glY8gTv.t10JwQbcIG",
+            "trucks_owned": [
+                1,
+                2,
+                3
+            ]
+        }
+    ]
+
+    Trucks: get request to http://68.183.138.134/trucks returns
+    [
+        {
+            "id": 1,
+            "images": null,
+            "img_url": "https://s.abcnews.com/images/US/dog-food-truck-01-ht-jef-191010_hpEmbed_16x9_992.jpg",
+            "cuisine": "asian",
+            "customer_ratings": [
+                4,
+                3
+            ],
+            "customer_rating_avg": 3.5,
+            "menu": null,
+            "current_location": 1,
+            "next_location": 1
+        },
+        {
+            "id": 2,
+            "images": null,
+            "img_url": "https://www.rd.com/wp-content/uploads/2018/11/food-truck-2.jpg",
+            "cuisine": "vegetarian",
+            "customer_ratings": [
+                4,
+                1,
+                3
+            ],
+            "customer_rating_avg": 2.667,
+            "menu": null,
+            "current_location": 2,
+            "next_location": 2
+        },
+        {
+            "id": 3,
+            "images": null,
+            "img_url": "https://www.ft.com/__origami/service/image/v2/images/raw/https%3A%2F%2Fs3-ap-northeast-1.amazonaws.com%2Fpsh-ex-ftnikkei-3937bb4%2Fimages%2F7%2F9%2F0%2F2%2F20722097-1-eng-GB%2F190315_6845re1.jpg?source=nar-cms",
+            "cuisine": "ice cream",
+            "customer_ratings": [
+                4,
+                3,
+                5
+            ],
+            "customer_rating_avg": 4,
+            "menu": null,
+            "current_location": 3,
+            "next_location": 3
+        }
+    ]
+
 # BackEnd
 
 1. User can register/create an account as either a `operator` or `diner` by providing, at a minumum, a unique `username`, a valid `email` and a strong `password`. (mobile, web)

@@ -1,11 +1,20 @@
 const router = require('express').Router()
 
-const { registerDiner, getDinerByUsername, updateDinerLocation } = require('./model')
+const { registerDiner, getDinerByUsername, updateDinerLocation, getAllDiners } = require('./model')
 const { getTruckById, getTruckLocationByID } = require('../trucks/model')
 const { hashPassword, comparePasswords, generateToken } = require('../authHelpers')
 const { coordsToAddress, haversine } = require('../services')
 
 const { authToken, authType, dinerCoords } = require('../middleware')
+
+router.get('/', async(req, res, next) => {
+    try {
+        const diners = await getAllDiners()
+        res.json(diners)
+    } catch (error) {
+        next(error)
+    }
+})
 
 router.post('/register', async (req, res, next) => {
     try {
@@ -28,6 +37,7 @@ router.post('/register', async (req, res, next) => {
 })
 
 router.post('/login', async (req, res, next) => {
+    console.log('req.bodyLoginDiner', req.body)
     try {
         const { username, password } = req.body
 

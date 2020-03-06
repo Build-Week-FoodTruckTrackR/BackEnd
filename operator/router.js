@@ -1,11 +1,20 @@
 const router = require('express').Router()
 
-const { registerOperator, getOperatorByUsername } = require('./model')
+const { registerOperator, getOperatorByUsername, getAllOperators } = require('./model')
 const { getTruckById, getAllTrucks } = require('../trucks/model')
 const { authToken, authType, operatorTrucks } = require('../middleware')
 
 
 const { hashPassword, comparePasswords, generateToken } = require('../authHelpers')
+
+router.get('/', async (req, res, next) => {
+    try {
+        const operators = await getAllOperators()
+        res.json(operators)
+    } catch (error) {
+        next(error)
+    }
+})
 
 router.post('/register', async (req, res, next) => {
     try {
